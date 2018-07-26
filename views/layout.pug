@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title TrendHealth - Connect Test
+    script(src='https://connect.humanapi.co/connect.js')
+    
+  body
+    nav.navbar.navbar-inverse
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') TrendHealth
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            if user
+              li 
+                a(href='/auth/logout') Logout
+            else
+              li
+                a(href='/auth/register') Register
+              li
+                a(href='/auth/login') Login
+      block content
+      br
+      hr
+      footer
+          p Copyright. &copy; 2018. TrendHealth, Inc.
