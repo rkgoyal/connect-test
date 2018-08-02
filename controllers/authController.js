@@ -58,5 +58,3 @@ exports.auth_register_post = function(req, res) {
     });
   }
 };
-
-// Login process on POST

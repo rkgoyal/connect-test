@@ -18,15 +18,27 @@ router.get('/connect', function(req, res) {
         // expose the user to the template
         res.locals.user = user;
         console.log('In callback - User email is: ', user.email);
-        userEmail = user.email;
-
         // render the connect page
-        res.render('connect');
+        res.render('connect', user);
       }
     });
   } else {
     res.redirect('/auth/login');
   }
 });
+
+// User data in Json format
+router.get('/userdata', function(req, res) {
+
+            if (req.user === undefined) {
+                // The user is not logged in
+                res.json({});
+            } else {
+                res.json({
+                    userEmail: req.user.email
+                });
+            }
+});
+
 
 module.exports = router;

@@ -32,8 +32,6 @@ router.post('/login',
           // make passportjs setup the user object, serialize the user, ...
           req.login(user, {}, function(err) {
               if (err) { return next(err) };
-              console.log(req.user);
-              req.session.user = user;
               return res.redirect('/profile/connect');
           });
       })(req, res, next);
@@ -41,18 +39,6 @@ router.post('/login',
   }
 );
 
-// User data in Json format
-router.get('/userdata', function(req, res) {
-
-            if (req.user === undefined) {
-                // The user is not logged in
-                res.json({});
-            } else {
-                res.json({
-                    username: req.user
-                });
-            }
-        });
 
 // Logout
 router.get('/logout', function(req, res){

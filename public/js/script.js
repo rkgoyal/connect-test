@@ -1,36 +1,16 @@
-
-// Define the getjson function
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
-
-// Use the getjson function to access userdata json
-getJSON('http://localhost:3000/auth/userdata',
-function(err, data) {
-  if (err !== null) {
-    alert('Something went wrong: ' + err);
-  } else {
-    alert('User email is: ' + data.username.email);
-  }
-});
+// Get user email from userdata API
+var xhReq = new XMLHttpRequest();
+  xhReq.open("GET", 'http://localhost:3000/profile/userdata', false);
+  xhReq.send(null);
+var jsonObject = JSON.parse(xhReq.responseText);
+console.log(jsonObject.userEmail);
 
 // Human API connect launch
 var connectBtn = document.getElementById('connect-health-data-btn');
 connectBtn.addEventListener('click', function(e) {
 
     var options = {
-      clientUserId: encodeURIComponent(unknown_for_now), // can be email
+      clientUserId: encodeURIComponent(jsonObject.userEmail), // can be email
       clientId: 'cdf0c805007e05f0f084e1bf0da88684cfe027f7', // found in Developer Portal
       publicToken: '',
       finish: function(err, sessionTokenObject) {
@@ -65,6 +45,7 @@ connectBtn.addEventListener('click', function(e) {
         // optional callback that will be called if the user
         // closes the popup without connecting any data sources.
         console.log('No data sources connected.');
+        alert('No data sources connected.');
       },
       error: function(err) {
         // optional callback that will be called if an error occurs while
