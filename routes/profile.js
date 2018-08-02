@@ -19,7 +19,7 @@ router.get('/connect', function(req, res) {
         res.locals.user = user;
         console.log('In callback - User email is: ', user.email);
         // render the connect page
-        res.render('connect', user);
+        res.render('connect');
       }
     });
   } else {

@@ -37,6 +37,7 @@ app.use(session({
   secret: 'elephanttree',
   resave: false,
   saveUninitialized: false,
+  unset: 'destroy',
   store: new MongoStore({
     mongooseConnection: db,
     clear_interval: 3600 * 24
