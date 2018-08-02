@@ -89,31 +89,45 @@ exports.post_session_token = function(req, res) {
 
 // All working up until this point
 // Now need to send the data to the database
-      User.findOne({ 'email': clientUserId },
-        function(err, foundObject) {
-          if(err) {
-            console.log(err);
-            res.status(500).send();
-          } else {
-            if (!foundObject) {
-              res.status(404).send();
-            } else {
-              foundObject.humanapi.accessToken = accessToken,
-              foundObject.humanapi.publicToken = publicToken,
-              foundObject.humanapi.humanId = humanId,
-              foundObject.humanapi.clientUserId = clientUserId
-            }
+      User.update({ 'email': clientUserId }, {
+          $set: {
+            "humanapi.accessToken": accessToken,
+            "humanapi.publicToken": publicToken,
+            "humanapi.humanId": humanId,
+            "humanapi.clientUserId": clientUserId,
+          }},
+          {multi:true},
+       function(err, numberAffected) {
+       });
 
-            foundObject.save(function(err, updatedObject) {
-              if(err) {
-                console.log(err);
-              } else {
-                res.send(updatedObject);
-              }
-            });
-          }
-        }
-      );
+// // This part of code works but also throws an error
+//       User.findOne({ 'email': clientUserId },
+//         function(err, foundObject) {
+//           if(err) {
+//             console.log(err);
+//             res.status(500).send();
+//           } else {
+//             if (!foundObject) {
+//               res.status(404).send();
+//             } else {
+//               foundObject.humanapi.accessToken = accessToken,
+//               foundObject.humanapi.publicToken = publicToken,
+//               foundObject.humanapi.humanId = humanId,
+//               foundObject.humanapi.clientUserId = clientUserId
+//             }
+//
+//             foundObject.save(function(err, updatedObject) {
+//               if(err) {
+//                 console.log(err);
+//               } else {
+//                 res.send(updatedObject);
+//               }
+//             });
+//           }
+//         }
+//       );
+
+
       // res.redirect('/profile/dashboard');
     });
 };
