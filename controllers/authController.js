@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const request = require('request');
 
 // Bring in User Model
 let User = require('../models/user');
@@ -60,5 +61,23 @@ exports.auth_register_post = function(req, res) {
 };
 
 // POST sessiontokenobject to server
-// exports.post_session_token = function(req, res) {
-//   const name = req.body.name;
+exports.post_session_token = function(req, res) {
+  var sessionTokenObject = req.body;
+  console.log('first object: ' + sessionTokenObject);
+  // grab client secret from app settings page and `sign` `sessionTokenObject` with it.
+  sessionTokenObject.clientSecret = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
+  console.log('second object: ' + JSON.stringify(sessionTokenObject));
+
+  request({
+    method: 'POST',
+    uri: 'https://user.humanapi.co/v1/connect/tokens',
+    json: sessionTokenObject
+  }, function(err, resp, body) {
+      if(err) return res.send(422);
+      // at this point if request was successful body object
+      // will have `accessToken`, `publicToken` and `humanId` associated in it.
+      // You probably want to store these fields in your system in association to user's data.
+      console.log(body);
+      res.status(201).send(body);
+    });
+};

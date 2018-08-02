@@ -24,15 +24,11 @@ const UserSchema = mongoose.Schema({
       type: String,
       required: false
     },
-    sessionToken: {
-      type: String,
-      required: false
-    },
-    userId: {
-      type: String,
-      required: false
-    },
     accessToken: {
+      type: String,
+      required: false
+    },
+    clientUserId: {
       type: String,
       required: false
     },

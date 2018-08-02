@@ -30,6 +30,10 @@ router.get('/connect', function(req, res) {
   }
 });
 
+// Post sessionTokenObject to the server
+router.post('/connect/finish', auth_controller.post_session_token);
+
+
 // User data in Json format
 router.get('/userdata', function(req, res) {
 
@@ -43,8 +47,7 @@ router.get('/userdata', function(req, res) {
             }
 });
 
-// Post sessionTokenObject to the server
-// router.post('/connect/session', auth_controller.post_session_token)
+
 
 
 module.exports = router;

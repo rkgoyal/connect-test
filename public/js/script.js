@@ -1,5 +1,3 @@
-// const request = require('request');
-
 // Get user email from userdata API
 var xhReq = new XMLHttpRequest();
   xhReq.open("GET", 'http://localhost:3000/profile/userdata', false);
@@ -19,25 +17,11 @@ connectBtn.addEventListener('click', function(e) {
         // callback that would be called after user finishes
         // connecting data.
         console.log(sessionTokenObject);
-
         // you need to post `sessionTokenObject` to your server
-        request.post({
-          method: 'POST',
-          url: '/profile/connect/session',
-          data: sessionTokenObject
-        }, function(error, response, body) {
-          if(error) {
-            console.log(error);
-          } else {
-            console.log(response.statusCode, body);
-            res.redirect('/profile/connect');
-          }
-        });
-        // append `clientSecret` to it and send it to our server.
-        // sessionTokenObject.clientSecret  = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
-        // console.log(sessionTokenObject);
-
-
+        var xhr = new XMLHttpRequest();
+          xhr.open("POST", '/profile/connect/finish', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.send(JSON.stringify(sessionTokenObject));
 
       },
       close: function() {
@@ -45,12 +29,14 @@ connectBtn.addEventListener('click', function(e) {
         // closes the popup without connecting any data sources.
         console.log('No data sources connected.');
         alert('No data sources connected.');
+        location.reload();
       },
       error: function(err) {
         // optional callback that will be called if an error occurs while
         // loading the popup.
         // `err` is an object with the fields: `code`, `message`, `detailedMessage`
         console.log(err);
+        location.reload();
       }
     }
 
