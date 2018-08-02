@@ -18,6 +18,28 @@ const UserSchema = mongoose.Schema({
   password:{
     type: String,
     required: true
+  },
+  humanapi:{
+    humanId: {
+      type: String,
+      required: false
+    },
+    sessionToken: {
+      type: String,
+      required: false
+    },
+    userId: {
+      type: String,
+      required: false
+    },
+    accessToken: {
+      type: String,
+      required: false
+    },
+    publicToken: {
+      type: String,
+      required: false
+    }
   }
 });
 

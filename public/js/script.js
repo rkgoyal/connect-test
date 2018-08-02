@@ -1,3 +1,5 @@
+// const request = require('request');
+
 // Get user email from userdata API
 var xhReq = new XMLHttpRequest();
   xhReq.open("GET", 'http://localhost:3000/profile/userdata', false);
@@ -19,26 +21,23 @@ connectBtn.addEventListener('click', function(e) {
         console.log(sessionTokenObject);
 
         // you need to post `sessionTokenObject` to your server
-
-
-
-        // append `clientSecret` to it and send it to our server.
-        sessionTokenObject.clientSecret  = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
-        console.log(sessionTokenObject);
-
         request.post({
           method: 'POST',
-          url: 'https://user.humanapi.co/v1/connect/tokens',
+          url: '/profile/connect/session',
           data: sessionTokenObject
         }, function(error, response, body) {
           if(error) {
             console.log(error);
           } else {
             console.log(response.statusCode, body);
+            res.redirect('/profile/connect');
           }
         });
+        // append `clientSecret` to it and send it to our server.
+        // sessionTokenObject.clientSecret  = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
+        // console.log(sessionTokenObject);
 
-        // sending POST request with jQuery might look like this.
+
 
       },
       close: function() {

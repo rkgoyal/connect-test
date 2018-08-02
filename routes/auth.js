@@ -22,12 +22,10 @@ router.get('/login', function(req, res){
 // Login Process
 router.post('/login',
   function(req, res, next) {
-      passport.authenticate('local', function(err, user) {
+      passport.authenticate('local',
+        function(err, user) {
           if (err) { return next(err) }
-          if (!user) {
-              res.local("username", req.param('username'));
-              return res.render('login', { error: true });
-          }
+          if (!user) { return res.redirect('/auth/login'); }
 
           // make passportjs setup the user object, serialize the user, ...
           req.login(user, {}, function(err) {

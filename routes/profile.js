@@ -4,6 +4,9 @@ var router = express.Router();
 // Bring in User Model
 let User = require('../models/user');
 
+// Require our controllers.
+var auth_controller = require('../controllers/authController');
+
 // GET Connect page
 router.get('/connect', function(req, res) {
   if (req.session && req.session.user) { // Check if session exists
@@ -17,7 +20,7 @@ router.get('/connect', function(req, res) {
       } else {
         // expose the user to the template
         res.locals.user = user;
-        console.log('In callback - User email is: ', user.email);
+        console.log('User logged in as: ', user.email);
         // render the connect page
         res.render('connect');
       }
@@ -39,6 +42,9 @@ router.get('/userdata', function(req, res) {
                 });
             }
 });
+
+// Post sessionTokenObject to the server
+// router.post('/connect/session', auth_controller.post_session_token)
 
 
 module.exports = router;

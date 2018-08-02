@@ -58,3 +58,7 @@ exports.auth_register_post = function(req, res) {
     });
   }
 };
+
+// POST sessiontokenobject to server
+// exports.post_session_token = function(req, res) {
+//   const name = req.body.name;
