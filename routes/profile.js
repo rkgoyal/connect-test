@@ -42,7 +42,8 @@ router.get('/userdata', function(req, res) {
                 res.json({});
             } else {
                 res.json({
-                    userEmail: req.user.email
+                    userEmail: req.user.email,
+                    publicToken: req.user.humanapi.publicToken
                 });
             }
 });

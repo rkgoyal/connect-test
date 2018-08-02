@@ -4,6 +4,9 @@ var xhReq = new XMLHttpRequest();
   xhReq.send(null);
 var jsonObject = JSON.parse(xhReq.responseText);
 console.log(jsonObject.userEmail);
+// Get user publicToken from the server
+console.log(jsonObject.publicToken);
+
 
 // Human API connect launch
 var connectBtn = document.getElementById('connect-health-data-btn');
@@ -12,7 +15,7 @@ connectBtn.addEventListener('click', function(e) {
     var options = {
       clientUserId: encodeURIComponent(jsonObject.userEmail), // can be email
       clientId: 'cdf0c805007e05f0f084e1bf0da88684cfe027f7', // found in Developer Portal
-      publicToken: '',
+      publicToken: jsonObject.publicToken,
       finish: function(err, sessionTokenObject) {
         // callback that would be called after user finishes
         // connecting data.

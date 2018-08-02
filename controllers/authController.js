@@ -87,8 +87,7 @@ exports.post_session_token = function(req, res) {
       console.log('publicToken is: ' + publicToken);
       console.log('accessToken is: ' + accessToken);
 
-// All working up until this point
-// Now need to send the data to the database
+// Update the user in the database with the API credentials
       User.update({ 'email': clientUserId }, {
           $set: {
             "humanapi.accessToken": accessToken,
@@ -99,34 +98,6 @@ exports.post_session_token = function(req, res) {
           {multi:true},
        function(err, numberAffected) {
        });
-
-// // This part of code works but also throws an error
-//       User.findOne({ 'email': clientUserId },
-//         function(err, foundObject) {
-//           if(err) {
-//             console.log(err);
-//             res.status(500).send();
-//           } else {
-//             if (!foundObject) {
-//               res.status(404).send();
-//             } else {
-//               foundObject.humanapi.accessToken = accessToken,
-//               foundObject.humanapi.publicToken = publicToken,
-//               foundObject.humanapi.humanId = humanId,
-//               foundObject.humanapi.clientUserId = clientUserId
-//             }
-//
-//             foundObject.save(function(err, updatedObject) {
-//               if(err) {
-//                 console.log(err);
-//               } else {
-//                 res.send(updatedObject);
-//               }
-//             });
-//           }
-//         }
-//       );
-
 
       // res.redirect('/profile/dashboard');
     });
