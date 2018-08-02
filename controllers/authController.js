@@ -63,10 +63,8 @@ exports.auth_register_post = function(req, res) {
 // POST sessiontokenobject to server
 exports.post_session_token = function(req, res) {
   var sessionTokenObject = req.body;
-  console.log('first object: ' + sessionTokenObject);
   // grab client secret from app settings page and `sign` `sessionTokenObject` with it.
   sessionTokenObject.clientSecret = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
-  console.log('second object: ' + JSON.stringify(sessionTokenObject));
 
   request({
     method: 'POST',
@@ -79,5 +77,43 @@ exports.post_session_token = function(req, res) {
       // You probably want to store these fields in your system in association to user's data.
       console.log(body);
       res.status(201).send(body);
+
+      const accessToken = body.accessToken;
+      const publicToken = body.publicToken;
+      const humanId = body.humanId;
+      const clientUserId = body.clientUserId;
+
+      console.log('clientUserId is: ' + clientUserId);
+      console.log('publicToken is: ' + publicToken);
+      console.log('accessToken is: ' + accessToken);
+
+// All working up until this point
+// Now need to send the data to the database
+      User.findOne({ 'email': clientUserId },
+        function(err, foundObject) {
+          if(err) {
+            console.log(err);
+            res.status(500).send();
+          } else {
+            if (!foundObject) {
+              res.status(404).send();
+            } else {
+              foundObject.humanapi.accessToken = accessToken,
+              foundObject.humanapi.publicToken = publicToken,
+              foundObject.humanapi.humanId = humanId,
+              foundObject.humanapi.clientUserId = clientUserId
+            }
+
+            foundObject.save(function(err, updatedObject) {
+              if(err) {
+                console.log(err);
+              } else {
+                res.send(updatedObject);
+              }
+            });
+          }
+        }
+      );
+      // res.redirect('/profile/dashboard');
     });
 };

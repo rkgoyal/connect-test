@@ -92,10 +92,10 @@ app.use(function(req, res, next) {
 // Set up the routes
 var index = require('./routes/index');
 var auth = require('./routes/auth');
-var thapp = require('./routes/profile');
+var profile = require('./routes/profile');
 app.use('/', index);
 app.use('/auth', auth);
-app.use('/profile', thapp);
+app.use('/profile', profile);
 
 
 module.exports = app;

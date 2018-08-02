@@ -19,23 +19,25 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  humanapi:{
-    humanId: {
-      type: String,
-      required: false
-    },
-    accessToken: {
-      type: String,
-      required: false
-    },
-    clientUserId: {
-      type: String,
-      required: false
-    },
-    publicToken: {
-      type: String,
-      required: false
-    }
+
+  humanapi: {
+    
+      humanId: {
+        type: String,
+        required: false
+      },
+      accessToken: {
+        type: String,
+        required: false
+      },
+      clientUserId: {
+        type: String,
+        required: false
+      },
+      publicToken: {
+        type: String,
+        required: false
+      }
   }
 });
 
