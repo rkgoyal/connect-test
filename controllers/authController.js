@@ -34,10 +34,10 @@ exports.auth_register_post = function(req, res) {
     });
   } else {
     let newUser = new User({
-      name:name,
-      username:username,
-      email:email,
-      password:password
+      name : name,
+      username : username,
+      email : email,
+      password : password
     });
 
     bcrypt.genSalt(10, function(err, salt){

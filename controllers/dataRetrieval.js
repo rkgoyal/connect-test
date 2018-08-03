@@ -9,16 +9,22 @@ let Sources = require('../models/datasources');
 exports.get_sources = function(req, res) {
     console.log("Current user is: " + req.user.humanapi.clientUserId);
     var accessToken = req.user.humanapi.accessToken;
+    var userHumanId = req.user.humanapi.humanId;
     request
     .get('https://api.humanapi.co/v1/human/sources?access_token=' + accessToken)
     .on('data', function(data) {
-      console.log(JSON.parse(data));
-    });
+      var sourceDoc = JSON.parse(data);
+      console.log(typeof sourceDoc);
+      console.log(sourceDoc);
 
+      var newSources = new Sources({
+        humanId : userHumanId,
+        sources : sourceDoc
+      });
+      
+      newSources.save();
 
-
-
-
+      });
 
     res.redirect('/profile/dashboard');
   };

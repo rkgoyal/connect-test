@@ -56,6 +56,10 @@ var SourceSchema = mongoose.Schema({
   }
 })
 
+
+const Source = module.exports = mongoose.model('Source', SourceSchema);
+
+
 // Sources associates with user Schema
 const SourcesSchema = mongoose.Schema({
   humanId:{
@@ -64,7 +68,6 @@ const SourcesSchema = mongoose.Schema({
   },
   sources: [SourceSchema]
 });
-
 
 
 const Sources = module.exports = mongoose.model('Sources', SourcesSchema);
