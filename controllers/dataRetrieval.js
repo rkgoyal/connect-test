@@ -1,8 +1,8 @@
 const request = require('request');
 const logger = require('morgan');
 
-// Bring in User Model
-let User = require('../models/user');
+// Bring in Data Sources Model
+let Sources = require('../models/datasources');
 
 
 // GET sources associated with User from Utility API
@@ -14,6 +14,12 @@ exports.get_sources = function(req, res) {
     .on('data', function(data) {
       console.log(JSON.parse(data));
     });
+
+    
+
+
+
+
     res.redirect('/profile/dashboard');
   };
 
