@@ -16,6 +16,7 @@ connectBtn.addEventListener('click', function(e) {
       clientUserId: encodeURIComponent(jsonObject.userEmail), // can be email
       clientId: 'cdf0c805007e05f0f084e1bf0da88684cfe027f7', // found in Developer Portal
       publicToken: jsonObject.publicToken,
+      modal: 1,
       finish: function(err, sessionTokenObject) {
         // callback that would be called after user finishes
         // connecting data.
@@ -25,6 +26,9 @@ connectBtn.addEventListener('click', function(e) {
           xhr.open("POST", '/profile/connect/finish', true);
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.send(JSON.stringify(sessionTokenObject));
+
+      location.reload();
+      
 
       },
       close: function() {

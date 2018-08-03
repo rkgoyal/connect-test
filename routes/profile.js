@@ -50,7 +50,11 @@ router.get('/userdata', function(req, res) {
 
 // Render the dashboard page after data source connections
 router.get('/dashboard', function(req, res) {
-  res.render('dashboard');
+  if (req.user) {
+    res.render('dashboard');
+  } else {
+    res.redirect('/auth/login');
+  }
 });
 
 

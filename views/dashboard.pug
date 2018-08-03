@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Welcome to your health dashboard!
+  p
+    | Click here to connect additional data sources or remove existing ones:
+    br
+    img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
+  br
+  p
+    a(class='button', href='/dataretrieval') Retrieve my data!
+  
+
+  
+  script(src='/js/script.js')

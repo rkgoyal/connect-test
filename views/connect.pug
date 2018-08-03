@@ -3,10 +3,10 @@ extends layout
 block content
   h1 Connect your health data
   p
-    //- | Email:
-    //- br
-    //- input#user-email(type='email')
+    img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
   br
   p
-    img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
+    a(class='button', href='/profile/dashboard') Go to my dashboard!
+          
+      
   script(src='/js/script.js')

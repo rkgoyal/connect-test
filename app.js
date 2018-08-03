@@ -93,9 +93,11 @@ app.use(function(req, res, next) {
 var index = require('./routes/index');
 var auth = require('./routes/auth');
 var profile = require('./routes/profile');
+var dataretrieval = require('./routes/dataretrieval');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/profile', profile);
+app.use('/dataretrieval', dataretrieval);
 
 
 module.exports = app;

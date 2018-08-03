@@ -99,6 +99,5 @@ exports.post_session_token = function(req, res) {
        function(err, numberAffected) {
        });
 
-      // res.redirect('/profile/dashboard');
     });
 };
