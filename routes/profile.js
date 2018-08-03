@@ -22,7 +22,7 @@ router.get('/connect', function(req, res) {
         res.locals.user = user;
         console.log('User logged in as: ', user.email);
         // render the connect page
-        res.render('connect');
+        res.render('connect', {title: 'Connect your health data'});
       }
     });
   } else {
@@ -51,7 +51,7 @@ router.get('/userdata', function(req, res) {
 // Render the dashboard page after data source connections
 router.get('/dashboard', function(req, res) {
   if (req.user) {
-    res.render('dashboard');
+    res.render('dashboard', {title: 'My Health Dashboard'});
   } else {
     res.redirect('/auth/login');
   }

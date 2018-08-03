@@ -8,7 +8,7 @@ var auth_controller = require('../controllers/authController');
 
 // Register Form
 router.get('/register', function(req, res){
-  res.render('register')
+  res.render('register', {title: 'Register for an account'})
 });
 
 // Register Process
@@ -16,7 +16,7 @@ router.post('/register', auth_controller.auth_register_post);
 
 // Login Form
 router.get('/login', function(req, res){
-  res.render('login')
+  res.render('login', {title: 'Login'})
 });
 
 // Login Process
