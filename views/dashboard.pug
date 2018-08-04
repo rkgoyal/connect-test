@@ -8,8 +8,10 @@ block content
     img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
   br
   p
-    a(class='button', href='/dataretrieval') Retrieve my data!
-  
+    a(class='button', href='/dataretrieval/sources', method='GET') Retrieve my sources of data!
+  br
+  p
+    a(class='button', href='/dataretrieval/activitysummaries', method='GET') Get my activity summaries!
 
   
   script(src='/js/script.js')
