@@ -16,6 +16,7 @@ router.get('/', function(req, res) {
 // GET sources associated with the User
 router.get('/sources', dataretrieval_controller.get_sources);
 
-
+// GET sources associated with the User
+router.get('/activitysummaries', dataretrieval_controller.get_activity_summary);
 
 module.exports = router;
