@@ -24,7 +24,7 @@ exports.get_sources = function(req, res) {
 
       });
     res.redirect('/profile/dashboard');
-  };
+};
 
 // Bring in Activity Summary Model
 let ActivitySummaries = require('../models/activitysummaries');
@@ -34,11 +34,18 @@ exports.get_activity_summary = function(req, res) {
   console.log("Current user is: " + req.user.humanapi.clientUserId);
   var accessToken = req.user.humanapi.accessToken;
   var userHumanId = req.user.humanapi.humanId;
-  var request = require('request');
-    request
-    .get('https://api.humanapi.co/v1/human/activities/summaries?access_token=' + accessToken)
-    .on('data', function(data) {
-      var activityDocs = JSON.parse(data);
+
+  var options = {
+  url: 'https://api.humanapi.co/v1/human/activities/summaries?access_token=' + accessToken,
+  method: 'GET',
+  headers: {
+      'Accept': 'application/json',
+      'Accept-Charset': 'utf-8',
+      }
+  };
+
+  request(options, function(err, res, body) {
+      let activityDocs = JSON.parse(body);
       console.log(activityDocs);
 
       var newActivitySummaries = new ActivitySummaries({
@@ -46,8 +53,7 @@ exports.get_activity_summary = function(req, res) {
                                       activitySummaries : activityDocs
                                     });
       newActivitySummaries.save();
+      });
 
-      res.redirect('/profile/dashboard');
-
-    });
-  };
+    res.redirect('/profile/dashboard');
+};
