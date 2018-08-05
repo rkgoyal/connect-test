@@ -1,16 +1,25 @@
 extends layout
 
 block content
-  h1 Log In
-  form(method='POST', action='/auth/login')
-    #form-group
-      label Username:
-      input.form-control(name='username',type='string')
-    #form-group
-      label Password:
-      input.form-control(name='password',type='password')
-    br
-    input.btn.btn-primary(type='submit',value='Submit')
-    br
-    p Don't have an account?
-    a(class='button', href='/auth/register') Register here!
+  main
+    .container
+      .row
+        .col
+        .col
+          h1 Log In
+          form(method='POST', action='/auth/login')
+            #form-group
+              label Username:
+              input.form-control(name='username',type='string')
+            #form-group
+              label Password:
+              input.form-control(name='password',type='password')
+            br
+            input.btn.btn-primary(type='submit',value='Submit')
+          br
+          p Don't have an account?
+          a(class='button', href='/auth/register') Register here!
+        .col
+          
+
+  

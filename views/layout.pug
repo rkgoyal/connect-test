@@ -1,26 +1,35 @@
 doctype html
 html
   head
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css', type='text/css')
-    title #{title} - Bettermy Health - Prototype
     script(src='https://connect.humanapi.co/connect.js')
+    title #{title} - Bettermy Health - Prototype
+    append head
     
   body
-    .container
-      .navbar-header
+    header
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         a.navbar-brand(href='/') Bettermy Health
-      #navbar.collapse.navbar-collapse
-        ul.nav.navbar-nav.navbar-right
-          if user
-            li 
-              a(href='/auth/logout') Logout
-          else
-            li
-              a(href='/auth/register') Register
-            li
-              a(href='/auth/login') Login
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            if user
+              li.nav-item
+                a.nav-link(href='/auth/logout') Logout 
+            else
+              li.nav-item
+                a.nav-link(href='/auth/login') Log In
+              li.nav-item
+                a.nav-link(href='/auth/register') Register
+
+    main      
       block content
-      br
-      hr
-      footer#footer
-          p Copyright. &copy; 2018. Bettermy Health Technologies, Inc.
+  
+  footer#footer
+    p Copyright. &copy; 2018. Bettermy Health Technologies, Inc.
+    append footer
