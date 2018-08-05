@@ -70,7 +70,7 @@ exports.post_session_token = function(req, res) {
     method: 'POST',
     uri: 'https://user.humanapi.co/v1/connect/tokens',
     json: sessionTokenObject
-  }, function(err, resp, body) {
+    }, function(err, resp, body) {
       if(err) return res.send(422);
       // at this point if request was successful body object
       // will have `accessToken`, `publicToken` and `humanId` associated in it.
@@ -87,7 +87,7 @@ exports.post_session_token = function(req, res) {
       console.log('publicToken is: ' + publicToken);
       console.log('accessToken is: ' + accessToken);
 
-// Update the user in the database with the API credentials
+      // Update the user in the database with the API credentials
       User.update({ 'email': clientUserId }, {
           $set: {
             "humanapi.accessToken": accessToken,

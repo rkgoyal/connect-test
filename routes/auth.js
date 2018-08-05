@@ -24,14 +24,25 @@ router.post('/login',
   function(req, res, next) {
       passport.authenticate('local',
         function(err, user) {
-          if (err) { return next(err) }
-          if (!user) { return res.redirect('/auth/login'); }
+          if (err) {
+            req.flash('danger', 'Invalid username or password.');
+            return next(err)
+          }
+          if (!user) {
+            return res.render('login', {message: req.flash('danger')});
+          }
 
           // make passportjs setup the user object, serialize the user, ...
           req.login(user, {}, function(err) {
-              if (err) { return next(err) };
+              if (err) {
+                return next(err)
+              }
               req.session.user = user;
-              return res.redirect('/profile/connect');
+              if (typeof user.humanapi.publicToken !== "undefined") {
+                res.redirect('/profile/dashboard');
+              } else {
+                return res.redirect('/profile/connect');
+              }
           });
       })(req, res, next);
       return;

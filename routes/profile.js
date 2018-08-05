@@ -18,16 +18,16 @@ router.get('/connect', function(req, res) {
         req.session.reset();
         res.redirect('/auth/login');
       } else {
-        // expose the user to the template
-        res.locals.user = user;
-        console.log('User logged in as: ', user.email);
-        // render the connect page
-        res.render('connect', {title: 'Connect your health data'});
-      }
-    });
-  } else {
-    res.redirect('/auth/login');
-  }
+          // expose the user to the template
+          res.locals.user = user;
+          console.log('User logged in as: ', user.email);
+          // render the connect page
+          res.render('connect', {title: 'Connect your health data'});
+          }
+        });
+      } else {
+        res.redirect('/auth/login');
+        }
 });
 
 // Post sessionTokenObject to the server
@@ -37,21 +37,22 @@ router.post('/connect/finish', auth_controller.post_session_token);
 // User data in Json format
 router.get('/userdata', function(req, res) {
 
-            if (req.user === undefined) {
-                // The user is not logged in
-                res.json({});
-            } else {
-                res.json({
-                    userEmail: req.user.email,
-                    publicToken: req.user.humanapi.publicToken
-                });
-            }
+      if (req.user === undefined) {
+          // The user is not logged in
+          res.json({});
+      } else {
+          res.json({
+              userEmail: req.user.email,
+              publicToken: req.user.humanapi.publicToken
+          });
+      }
 });
 
 // Render the dashboard page after data source connections
 router.get('/dashboard', function(req, res) {
   if (req.user) {
-    res.render('dashboard', {title: 'My Health Dashboard'});
+    var name = req.user.name;
+    res.render('dashboard', {title: 'My Health Dashboard', user: name});
   } else {
     res.redirect('/auth/login');
   }
