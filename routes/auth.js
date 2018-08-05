@@ -31,7 +31,11 @@ router.post('/login',
           req.login(user, {}, function(err) {
               if (err) { return next(err) };
               req.session.user = user;
-              return res.redirect('/profile/connect');
+              if (typeof user.humanapi.publicToken !== "undefined") {
+                res.redirect('/profile/dashboard');
+              } else {
+                return res.redirect('/profile/connect');
+              };
           });
       })(req, res, next);
       return;
