@@ -94,10 +94,12 @@ var index = require('./routes/index');
 var auth = require('./routes/auth');
 var profile = require('./routes/profile');
 var dataretrieval = require('./routes/dataretrieval');
+var dashanalytics = require('./routes/dashanalytics');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/profile', profile);
 app.use('/dataretrieval', dataretrieval);
+app.use('/dashanalytics', dashanalytics);
 
 
 module.exports = app;
