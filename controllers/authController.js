@@ -88,7 +88,7 @@ exports.post_session_token = function(req, res) {
       console.log('accessToken is: ' + accessToken);
 
       // Update the user in the database with the API credentials
-      User.update({ 'email': clientUserId }, {
+      User.updateOne({ 'email': clientUserId }, {
           $set: {
             "humanapi.accessToken": accessToken,
             "humanapi.publicToken": publicToken,
