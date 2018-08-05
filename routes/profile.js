@@ -18,16 +18,16 @@ router.get('/connect', function(req, res) {
         req.session.reset();
         res.redirect('/auth/login');
       } else {
-        // expose the user to the template
-        res.locals.user = user;
-        console.log('User logged in as: ', user.email);
-        // render the connect page
-        res.render('connect', {title: 'Connect your health data'});
-      }
-    });
-  } else {
-    res.redirect('/auth/login');
-  }
+          // expose the user to the template
+          res.locals.user = user;
+          console.log('User logged in as: ', user.email);
+          // render the connect page
+          res.render('connect', {title: 'Connect your health data'});
+          }
+        });
+      } else {
+        res.redirect('/auth/login');
+        }
 });
 
 // Post sessionTokenObject to the server

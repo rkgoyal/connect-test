@@ -6,20 +6,19 @@ html
     script(src='https://connect.humanapi.co/connect.js')
     
   body
-    nav.navbar.navbar-inverse
-      .container
-        .navbar-header
-          a.navbar-brand(href='/') Bettermy Health
-        #navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            if user
-              li 
-                a(href='/auth/logout') Logout
-            else
-              li
-                a(href='/auth/register') Register
-              li
-                a(href='/auth/login') Login
+    .container
+      .navbar-header
+        a.navbar-brand(href='/') Bettermy Health
+      #navbar.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          if user
+            li 
+              a(href='/auth/logout') Logout
+          else
+            li
+              a(href='/auth/register') Register
+            li
+              a(href='/auth/login') Login
       block content
       br
       hr

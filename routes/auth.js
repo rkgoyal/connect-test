@@ -19,6 +19,11 @@ router.get('/login', function(req, res){
   res.render('login', {title: 'Login'})
 });
 
+// Login Form - #2 (Design Test)
+router.get('/login2', function(req, res){
+  res.render('login2', {title: 'Login'})
+});
+
 // Login Process
 router.post('/login',
   function(req, res, next) {

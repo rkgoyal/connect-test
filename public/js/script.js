@@ -27,9 +27,6 @@ connectBtn.addEventListener('click', function(e) {
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.send(JSON.stringify(sessionTokenObject));
 
-      location.reload();
-      
-
       },
       close: function() {
         // optional callback that will be called if the user
