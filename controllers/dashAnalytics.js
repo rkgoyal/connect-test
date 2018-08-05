@@ -11,6 +11,7 @@ let DashAnalytics = require('../models/dashanalytics');
 exports.get_dash_sources = function(req, res) {
   var humanId = req.session.user.humanapi.humanId;
   console.log('ID for dash sources is: ' + humanId);
+  var sourceList = [];
   Sources.
     findOne({"humanId": humanId}).
     exec(function(err, sourcesObject) {
@@ -20,9 +21,12 @@ exports.get_dash_sources = function(req, res) {
             console.log(sourcesObject);
             sourcesObject.sources.forEach(function(source) {
               console.log('%s has been connected since %s', source.source, source.connectedSince);
+              var sourceDetail = source.source + ' has been connected since ' + source.connectedSince;
+              sourceList.push(sourceDetail);
             });
 
-            res.redirect('/profile/dashboard');
+            res.render('dashboard', {"sourceList": sourceList});
+
           }
     });
   };
