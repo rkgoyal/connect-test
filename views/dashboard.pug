@@ -1,18 +1,27 @@
 extends layout
   
 block content
-  h6 You are logged in as #{user}.
-  br
-  h2 Welcome to your health dashboard!
-  p Click here to connect additional data sources or remove existing ones:
+  .container
+    .row
+      .col-8
+        h6 You are logged in as #{user}.
+        h2 Welcome to your health dashboard!
+      .col-4
+        p Click here to connect additional data sources or remove existing ones:
+          img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
+    .row
+      .col-8
+        h5 Trigger data retrievals:
+        ul
+          li
+            a(class='button', href='/dataretrieval/sources', method='GET') Retrieve my sources of data!
+          li
+            a(class='button', href='/dataretrieval/activitysummaries', method='GET') Get my activity summaries!
     br
-    img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
-  br
-  p
-    a(class='button', href='/dataretrieval/sources', method='GET') Retrieve my sources of data!
-  br
-  p
-    a(class='button', href='/dataretrieval/activitysummaries', method='GET') Get my activity summaries!
-
+    .row
+      .col-4
+        h5 Your connected data sources
+      .col-4
+        h5 Your recent activity summary 
   
   script(src='/js/script.js')
