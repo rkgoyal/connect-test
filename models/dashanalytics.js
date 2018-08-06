@@ -7,7 +7,7 @@ var DashSourceSchema = mongoose.Schema({
     required: true
   },
   connectedSince:{
-    type: String,
+    type: Date,
     required: true
   }
 });
