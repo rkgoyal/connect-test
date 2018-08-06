@@ -13,6 +13,7 @@ exports.dashboard = function(req, res) {
     var humanId = req.session.user.humanapi.humanId;
     console.log('ID for dash sources is: ' + humanId);
     var sourceList = [];
+
     Sources.
       findOne({"humanId": humanId}).
       exec(function(err, sourcesObject) {
@@ -21,21 +22,19 @@ exports.dashboard = function(req, res) {
             } else {
               console.log(sourcesObject);
               sourcesObject.sources.forEach(function(source) {
-                // console.log('%s has been connected since %s', source.source, source.connectedSince);
                 var sourceDetail = source.source + ' has been connected since ' + source.connectedSince;
                 sourceList.push(sourceDetail);
               });
-              // console.log('Source list is: ' + sourceList);
+              console.log('Source list is: ' + sourceList);
+
+              // Pass the values to the template
+              res.render('dashboard', {
+                  title: 'My Health Dashboard',
+                  name: name,
+                  sourceList: sourceList
+                });
             }
       });
-
-    console.log('Source list is: ' + sourceList);
-
-    res.render('dashboard', {
-      title: 'My Health Dashboard',
-      name: name,
-      sourceList: sourceList
-    });
 
   } else {
     res.redirect('/auth/login');
