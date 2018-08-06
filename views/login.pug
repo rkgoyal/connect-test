@@ -6,7 +6,8 @@ block content
       .row
         .col
         .col
-          h3 Log In
+          h4 <strong>Welcome to Bettermy Health</strong>
+          br
           form(method='POST', action='/auth/login')
             if (message)
               .alert.alert-danger
@@ -18,7 +19,7 @@ block content
               label Password:
               input.form-control(name='password',type='password')
             br
-            input.btn.btn-primary(type='submit',value='Submit')
+            input.btn.btn-primary(type='submit',value='Sign In')
           br
           p Don't have an account?
           a(class='button', href='/auth/register') Register here!

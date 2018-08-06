@@ -54,7 +54,7 @@ var SourceSchema = mongoose.Schema({
         required: false
       },
   }
-})
+});
 
 
 const Source = module.exports = mongoose.model('Source', SourceSchema);

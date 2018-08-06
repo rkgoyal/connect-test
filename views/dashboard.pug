@@ -4,7 +4,7 @@ block content
   .container
     .row
       .col-8
-        h6 You are logged in as #{user}.
+        h6 You are logged in as #{name}.
         h2 Welcome to your health dashboard!
       .col-4
         p Click here to connect additional data sources or remove existing ones:
@@ -20,7 +20,8 @@ block content
     br
     .row
       .col-4
-        h5 Your connected data sources
+        h5 Your connected data sources are:
+        li= sourceList
       .col-4
         h5 Your recent activity summary 
   

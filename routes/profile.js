@@ -48,15 +48,11 @@ router.get('/userdata', function(req, res) {
       }
 });
 
+// Require our controllers.
+var dashboard_controller = require('../controllers/dashboardController');
+
 // Render the dashboard page after data source connections
-router.get('/dashboard', function(req, res) {
-  if (req.user) {
-    var name = req.user.name;
-    res.render('dashboard', {title: 'My Health Dashboard', user: name});
-  } else {
-    res.redirect('/auth/login');
-  }
-});
+router.get('/dashboard', dashboard_controller.dashboard);
 
 
 module.exports = router;

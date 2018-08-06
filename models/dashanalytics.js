@@ -1,6 +1,21 @@
 const mongoose = require('mongoose');
 
-// Sources sub-document
+// Source schema for dashboard analytics
+var DashSourceSchema = mongoose.Schema({
+  source:{
+    type: String,
+    required: true
+  },
+  connectedSince:{
+    type: Date,
+    required: true
+  }
+});
+
+const DashSource = module.exports = mongoose.model('DashSource', DashSourceSchema);
+
+
+// Dahboard analytics schema
 var DashAnalyticsSchema = mongoose.Schema({
   humanId:{
     type: String,
@@ -10,6 +25,12 @@ var DashAnalyticsSchema = mongoose.Schema({
     type: String,
     required: true
   },
-
+  sourceAnalytics: {
+    numberConnectSources: {
+      type: Number
+    },
+    sourceDetails: [DashSourceSchema]
+  }
+});
 
 const DashAnalytics = module.exports = mongoose.model('DashAnalytics', DashAnalyticsSchema);

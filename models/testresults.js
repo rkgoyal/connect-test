@@ -22,7 +22,7 @@ var CodeSchema = mongoose.Schema({
     type: String,
     required: false
   },
-})
+});
 
 const Code = module.exports = mongoose.model('Code', CodeSchema);
 
@@ -58,7 +58,7 @@ var ComponentSchema = mongoose.Schema({
     required: true
   },
   codes: [CodeSchema]
-})
+});
 
 const Component = module.exports = mongoose.model('Component', ComponentSchema);
 
@@ -81,7 +81,7 @@ var RecipientSchema = mongoose.Schema({
     type: String,
     required: false
   }
-})
+});
 
 const Recipient = module.exports = mongoose.model('Recipient', RecipientSchema);
 
@@ -159,6 +159,6 @@ var TestResultsSchema = mongoose.Schema({
     },
   },
   codes: [CodeSchema]
-})
+});
 
 const TestResults = module.exports = mongoose.model('TestResults', TestResultsSchema);
