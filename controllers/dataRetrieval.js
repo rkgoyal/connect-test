@@ -10,17 +10,27 @@ exports.get_sources = function(req, res) {
     var accessToken = req.user.humanapi.accessToken;
     var userHumanId = req.user.humanapi.humanId;
     request
-    .get('https://api.humanapi.co/v1/human/sources?access_token=' + accessToken)
-    .on('data', function(data) {
-      var sourceDoc = JSON.parse(data);
-      console.log(sourceDoc);
+      .get('https://api.humanapi.co/v1/human/sources?access_token=' + accessToken)
+      .on('data', function(data) {
+        var sourceDoc = JSON.parse(data);
+        console.log('Sources connected are: ' + sourceDoc);
 
-      var newSources = new Sources({
-        humanId : userHumanId,
-        sources : sourceDoc
-      });
-
-      newSources.save();
+// NEED IF STATEMENT TO CHECK IF RECORD EXISTS AND IF SO, UPDATE, ELSE CREATE NEW
+        if (Sources.findOne({"humanId": userHumanId})) {
+          Sources.updateOne({"humanId": userHumanId}, {
+              $set: {
+                "sources": sourceDoc
+              }},
+              {multi:true},
+           function(err, numberAffected) {
+           })
+        } else {
+          var newSources = new Sources({
+            humanId : userHumanId,
+            sources : sourceDoc
+          });
+          newSources.save();
+        }
 
       });
     res.redirect('/profile/dashboard');
