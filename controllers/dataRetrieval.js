@@ -15,7 +15,8 @@ exports.get_sources = function(req, res) {
         var sourceDoc = JSON.parse(data);
         console.log('Sources connected are: ' + sourceDoc);
 
-// NEED IF STATEMENT TO CHECK IF RECORD EXISTS AND IF SO, UPDATE, ELSE CREATE NEW
+        // IF STATEMENT TO CHECK IF RECORD EXISTS AND IF SO, UPDATE,
+        // ELSE CREATE NEW RECORD
         if (Sources.findOne({"humanId": userHumanId})) {
           Sources.updateOne({"humanId": userHumanId}, {
               $set: {
