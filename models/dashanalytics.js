@@ -19,11 +19,13 @@ const DashSource = module.exports = mongoose.model('DashSource', DashSourceSchem
 var DashAnalyticsSchema = mongoose.Schema({
   humanId:{
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   email:{
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   sourceAnalytics: {
     numberConnectSources: {

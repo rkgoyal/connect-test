@@ -64,7 +64,8 @@ const Source = module.exports = mongoose.model('Source', SourceSchema);
 const SourcesSchema = mongoose.Schema({
   humanId:{
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   sources: [SourceSchema]
 });

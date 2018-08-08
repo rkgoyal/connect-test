@@ -94,7 +94,8 @@ const ActivitySummary = module.exports = mongoose.model('ActivitySummary', Activ
 var ActivitySummariesSchema = mongoose.Schema({
   humanId:{
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   activitySummaries: [ActivitySummarySchema]
 });

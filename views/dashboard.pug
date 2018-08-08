@@ -14,9 +14,11 @@ block content
         h5 Trigger data retrievals:
         ul
           li
-            a(class='button', href='/dataretrieval/sources', method='GET') Retrieve my sources of data!
+            a(class='button', href='/profile/refreshsources', method='GET') Refresh my sources of data!
           li
-            a(class='button', href='/dataretrieval/activitysummaries', method='GET') Get my activity summaries!
+            a(class='button', href='/profile/buildsourcelist', method='GET') Build my source list of data!
+          li
+            a(class='button', href='/profile/refreshactivity', method='GET') Get my latest activity summaries!
     br
     .row
       .col-4

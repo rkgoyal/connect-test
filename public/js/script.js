@@ -1,6 +1,6 @@
 // Get user email from userdata API
 var xhReq = new XMLHttpRequest();
-  xhReq.open("GET", 'http://localhost:3000/profile/userdata', false);
+  xhReq.open("GET", 'http://localhost:3000/user/userdata', false);
   xhReq.send(null);
 var jsonObject = JSON.parse(xhReq.responseText);
 console.log(jsonObject.userEmail);
@@ -23,7 +23,7 @@ connectBtn.addEventListener('click', function(e) {
         console.log(sessionTokenObject);
         // you need to post `sessionTokenObject` to your server
         var xhr = new XMLHttpRequest();
-          xhr.open("POST", '/profile/connect/finish', true);
+          xhr.open("POST", '/user/connect/finish', true);
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.send(JSON.stringify(sessionTokenObject));
 
