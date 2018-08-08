@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 
 // Sources sub-document
 var SourceSchema = mongoose.Schema({
@@ -70,5 +71,5 @@ const SourcesSchema = mongoose.Schema({
   sources: [SourceSchema]
 });
 
-
+SourcesSchema.plugin(timestamps);
 const Sources = module.exports = mongoose.model('Sources', SourcesSchema);

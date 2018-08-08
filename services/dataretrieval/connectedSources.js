@@ -41,15 +41,19 @@ exports.refresh_connected_sources = function(req, res) {
           }
           else {
             console.log('Sources record exists.');
-            Sources.updateOne({"humanId": userHumanId}, {
-                $set: {
-                  "sources": data
-                }},
-                {multi:true},
-                function(err, numberAffected) {
-                  console.log('Updated ' + numberAffected + ' records');
-                }
-              );
+            Sources.findOne({"humanId": userHumanId}, function(err, record) {
+              if (err) {
+                return console.log(err);
+              }
+              else {
+                record.sources = data;
+                record.save(function(err) {
+                  if (err) {
+                    return console.log(err);
+                  }
+                });
+              }
+            });
           }
         });
     })
@@ -59,7 +63,6 @@ exports.refresh_connected_sources = function(req, res) {
 
   res.sendStatus(200);
 };
-
 
 // Build and format the users current source source list
 exports.build_sourceList = function(req, res) {

@@ -39,15 +39,19 @@ exports.refresh_activity_summary = function(req, res) {
           }
           else {
             console.log('Activity summary record exists.');
-            ActivitySummaries.updateOne({"humanId": userHumanId}, {
-                $set: {
-                  "activitySummaries": data
-                }},
-                {multi:true},
-                function(err, numberAffected) {
-                  console.log('Updated ' + numberAffected + ' records');
-                }
-              );
+            ActivitySummaries.findOne({"humanId": userHumanId}, function(err, record) {
+              if (err) {
+                return console.log(err);
+              }
+              else {
+                record.activitySummaries = data;
+                record.save(function(err) {
+                  if (err) {
+                    return console.log(err);
+                  }
+                });
+              }
+            });
           }
         });
     })
