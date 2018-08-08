@@ -6,7 +6,16 @@ var connectedSources = require('../../services/dataretrieval/connectedSources');
 var activitySummaries = require('../../services/dataretrieval/activitySummaries');
 
 exports.dashboard = function(req, res) {
-  res.render('dashboard');
+  // Save name variable to pass to render
+  var name = req.user.name;
+  connectedSources.build_sourceList(req, res)
+  .then(function(sourceList) {
+      res.render('dashboard', {
+          title: 'My Health Dashboard',
+          name: name,
+          sourceList: sourceList
+        });
+    });
 };
 
 exports.refresh_sources = function(req, res) {

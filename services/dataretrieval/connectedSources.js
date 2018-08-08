@@ -1,5 +1,7 @@
 const request = require('request');
 var rp = require('request-promise');
+const bluebird = require('bluebird');
+var Promise = require("bluebird");
 
 // Bring in Data Sources Model
 let Sources = require('../../models/datasources');
@@ -66,43 +68,30 @@ exports.refresh_connected_sources = function(req, res) {
 
 // Build and format the users current source source list
 exports.build_sourceList = function(req, res) {
-    // Save name variable to pass to render
-    var name = req.user.name;
+  // Build the sourceList of users connected data sources
+  var humanId = req.user.humanapi.humanId;
+  console.log('ID for source list is: ' + humanId);
+  var sourceList = [];
 
-    // Build the sourceList of users connected data sources
-    var humanId = req.user.humanapi.humanId;
-    console.log('ID for source list is: ' + humanId);
-    var sourceList = [];
-
-    function getSourceList(humanId) {
-      Sources.findOne({"humanId": humanId}, function(err, record) {
-        if (err) {
-          return console.log(err);
-        }
-        if (!record) {
-          sourceList.push('Please refresh connected data sources.');
-          return res.render('dashboard', {
-              title: 'My Health Dashboard',
-              name: name,
-              sourceList: sourceList
-            });
-        }
-        else {
-          console.log('Sources object is: ' + record);
-          record.sources.forEach(function(source) {
-            var sourceDetail = source.source + ' has been connected since ' + source.connectedSince;
-            sourceList.push(sourceDetail);
-          });
-          console.log('Source list is: ' + sourceList);
-          // Pass the values to the template
-          res.render('dashboard', {
-              title: 'My Health Dashboard',
-              name: name,
-              sourceList: sourceList
-            });
-        }
-      });
-    };
-
-    getSourceList(humanId);
+  function getSourceList(humanId) {
+    Sources.findOne({"humanId": humanId}, function(err, record) {
+      if (err) {
+        return console.log(err);
+      }
+      if (!record) {
+        sourceList.push('Please refresh connected data sources.');
+        res.status(200).send(sourceList);
+      }
+      else {
+        console.log('Sources object is: ' + record);
+        record.sources.forEach(function(source) {
+          var sourceDetail = source.source + ' has been connected since ' + source.connectedSince;
+          sourceList.push(sourceDetail);
+        });
+        console.log('Source list is: ' + sourceList);
+        res.status(200).send(sourceList);
+      }
+    });
+  };
+  getSourceList(humanId);
 };
