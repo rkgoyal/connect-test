@@ -1,12 +1,18 @@
 extends layout
   
 block content
-  h3 Connect your health data
-  p
-    img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
-  br
-  p
-    a(class='button', href='/profile/dashboard') Go to my dashboard!
-          
+  .container
+    .row
+    .row
+      .col
+      .col
+        h3 Connect your health data
+        p
+          img#connect-health-data-btn(src='https://connect.humanapi.co/assets/button/blue.png')
+        br
+        p
+          a(class='button', href='/profile/dashboard') Go to my dashboard!
+      .col
+        
       
   script(src='/js/script.js')

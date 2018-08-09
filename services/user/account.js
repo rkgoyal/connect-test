@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const request = require('request');
 
+// Bring in HumanAPI config
+let Hapi = require('../../config/humanapi');
+
 // Bring in User Model
 let User = require('../../models/user');
 
@@ -61,7 +64,7 @@ exports.user_registration = function(req, res) {
 exports.api_credentials = function(req, res) {
   var sessionTokenObject = req.body;
   // grab client secret from app settings page and `sign` `sessionTokenObject` with it.
-  sessionTokenObject.clientSecret = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
+  sessionTokenObject.clientSecret = Hapi.clientSecret;
 
   request({
     method: 'POST',
@@ -114,7 +117,7 @@ exports.load_connect_page = function(req, res) {
           res.locals.user = user;
           console.log('User logged in as: ', user.email);
           // render the connect page
-          res.render('connect', {title: 'Connect your health data'});
+          res.render('connect', {title: 'Connect your health data', user: user});
           }
         });
       } else {

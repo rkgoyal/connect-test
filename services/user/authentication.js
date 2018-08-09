@@ -21,7 +21,7 @@ exports.user_signin = function(req, res, next) {
             if (typeof user.humanapi.publicToken !== "undefined") {
               res.redirect('/profile/dashboard');
             } else {
-              return res.render('connect');
+              return res.redirect('/user/connect');
             }
         });
     })(req, res, next);

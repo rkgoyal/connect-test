@@ -3,7 +3,7 @@ let Sources = require('../../../models/datasources');
 
 // Build and format the users current source source list
 exports.build_sourceList = function(req, res) {
-  var promise = new Promise(function resolver(resolve, reject) {
+  var sourceListPromise = new Promise(function resolver(resolve, reject) {
     var humanId = req.user.humanapi.humanId;
     console.log('ID for source list is: ' + humanId);
     var sourceList = [];
@@ -29,5 +29,5 @@ exports.build_sourceList = function(req, res) {
     };
     getSourceList(humanId);
   });
-  return promise;
+  return sourceListPromise;
 };
