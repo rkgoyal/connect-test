@@ -12,8 +12,9 @@ html
     
   body
     header
-      nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-        a.navbar-brand(href='/') Alfred Health
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        a.navbar-brand(href='/')
+          img#nav-logo(src='/images/logo-vert@2x.png')
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
           span.navbar-toggler-icon
         .collapse.navbar-collapse
@@ -31,5 +32,5 @@ html
       block content
   
   footer#footer
-    p Copyright. &copy; 2018. Alfred Health Intelligence, Inc.
+    p Copyright. &copy; 2018. Alfred Health Technologies, Inc.
     append footer

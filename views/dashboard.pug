@@ -22,9 +22,20 @@ block content
     br
     .row
       .col-4
-        h5 Your connected data sources are:
-        li= sourceList
+        table.table
+          thead.thead-light
+            tr
+              th Your connected data sources are:
+          tbody
+            tr
+              td #{sourceList}
       .col-4
-        h5 Your recent activity summary 
+        table.table
+          thead.thead-light
+            tr
+              th Your recent activity summary:
+            tbody
+              tr
+                td coming soon...
   
   script(src='/js/script.js')

@@ -32,7 +32,7 @@ connectBtn.addEventListener('click', function(e) {
         // optional callback that will be called if the user
         // closes the popup without connecting any data sources.
         console.log('No data sources connected.');
-        alert('No data sources connected.');
+        // alert('No data sources connected.');
         location.reload();
       },
       error: function(err) {
