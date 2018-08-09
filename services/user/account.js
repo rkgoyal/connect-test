@@ -2,17 +2,17 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const request = require('request');
 
+// Bring in HumanAPI config
+let Hapi = require('../../config/humanapi');
+
 // Bring in User Model
-let User = require('../models/user');
+let User = require('../../models/user');
 
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-var async = require('async');
-
-
-// Register process on POST
-exports.auth_register_post = function(req, res) {
+// User registration - create account
+exports.user_registration = function(req, res) {
   const name = req.body.name;
   const username = req.body.username;
   const email = req.body.email;
@@ -52,7 +52,7 @@ exports.auth_register_post = function(req, res) {
             return;
           } else {
             req.flash('success','You are now registered and can log in');
-            res.redirect('/auth/login');
+            res.render('login', {message: req.flash('success')});
           }
         });
       });
@@ -60,11 +60,11 @@ exports.auth_register_post = function(req, res) {
   }
 };
 
-// POST sessiontokenobject to server
-exports.post_session_token = function(req, res) {
+// Update Human API credentials
+exports.api_credentials = function(req, res) {
   var sessionTokenObject = req.body;
   // grab client secret from app settings page and `sign` `sessionTokenObject` with it.
-  sessionTokenObject.clientSecret = '6db64c7d8eb1fb070c0a6294934b3d0d7bceaf4f';
+  sessionTokenObject.clientSecret = Hapi.clientSecret;
 
   request({
     method: 'POST',
@@ -100,4 +100,40 @@ exports.post_session_token = function(req, res) {
        });
 
     });
+};
+
+// Load the connect page if the user has no connected data sources
+exports.load_connect_page = function(req, res) {
+  if (req.session && req.session.user) { // Check if session exists
+    // lookup the user in the DB by pulling their email from the session
+    User.findOne({ email: req.session.user.email }, function (err, user) {
+      if (!user) {
+        // if the user isn't found in the DB, reset the session info and
+        // redirect the user to the login page
+        req.session.reset();
+        res.redirect('/user/login');
+      } else {
+          // expose the user to the template
+          res.locals.user = user;
+          console.log('User logged in as: ', user.email);
+          // render the connect page
+          res.render('connect', {title: 'Connect your health data', user: user});
+          }
+        });
+      } else {
+        res.redirect('/user/login');
+        }
+};
+
+// Make select user data available to the front-end client
+exports.user_data_api = function(req, res) {
+  if (req.user === undefined) {
+      // The user is not logged in
+      res.json({});
+  } else {
+      res.json({
+          userEmail: req.user.email,
+          publicToken: req.user.humanapi.publicToken
+      });
+  }
 };

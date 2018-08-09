@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 // Require our controllers.
-var dashanalytics_controller = require('../controllers/dashAnalytics');
+var dashboard_controller = require('../controllers/alfred/dashboard');
 
 // GET sources for dash display
-router.get('/dashsources', dashanalytics_controller.get_dash_sources);
+router.get('/dashsources', dashboard_controller.dashboard);
 
 
 module.exports = router;

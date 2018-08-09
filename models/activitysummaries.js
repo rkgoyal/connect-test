@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 
 // Activity summary sub doc schema
 var ActivitySummarySchema = mongoose.Schema({
@@ -94,9 +95,11 @@ const ActivitySummary = module.exports = mongoose.model('ActivitySummary', Activ
 var ActivitySummariesSchema = mongoose.Schema({
   humanId:{
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   activitySummaries: [ActivitySummarySchema]
 });
 
+ActivitySummariesSchema.plugin(timestamps);
 const ActivitySummaries = module.exports = mongoose.model('ActivitySummaries', ActivitySummariesSchema);

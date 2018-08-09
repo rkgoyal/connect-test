@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.1",
     "body-parser": "~1.18.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
@@ -21,11 +22,13 @@
     "express-session": "^1.15.3",
     "express-validator": "^4.3.0",
     "mongoose": "^5.0.1",
+    "mongoose-timestamp": "^0.6.0",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "~2.0.0-rc.4",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "nodemon": "^1.14.11"

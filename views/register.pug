@@ -7,7 +7,7 @@ block content
         .col
         .col
           h1 Register
-          form(method='POST', action='/auth/register')
+          form(method='POST', action='/user/register')
             #form-group
               label Name:
               input.form-control(name='name', type='text')
@@ -27,5 +27,5 @@ block content
             input.btn.btn-primary(type='submit',value='Submit')
           br
           p Already have an account?
-          a(class='button', href='/auth/login') Log in here!
+          a(class='button', href='/user/login') Log in here!
         .col

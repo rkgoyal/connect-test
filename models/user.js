@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 
 // User Schema
 const UserSchema = mongoose.Schema({
@@ -21,7 +22,7 @@ const UserSchema = mongoose.Schema({
   },
 
   humanapi: {
-    
+
       humanId: {
         type: String,
         required: false
@@ -41,4 +42,5 @@ const UserSchema = mongoose.Schema({
   }
 });
 
+UserSchema.plugin(timestamps);
 const User = module.exports = mongoose.model('User', UserSchema);

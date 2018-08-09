@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 
 // Sources sub-document
 var SourceSchema = mongoose.Schema({
@@ -64,10 +65,11 @@ const Source = module.exports = mongoose.model('Source', SourceSchema);
 const SourcesSchema = mongoose.Schema({
   humanId:{
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   sources: [SourceSchema]
 });
 
-
+SourcesSchema.plugin(timestamps);
 const Sources = module.exports = mongoose.model('Sources', SourcesSchema);

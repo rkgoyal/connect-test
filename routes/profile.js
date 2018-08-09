@@ -1,58 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-// Bring in User Model
-let User = require('../models/user');
-
 // Require our controllers.
-var auth_controller = require('../controllers/authController');
-
-// GET Connect page
-router.get('/connect', function(req, res) {
-  if (req.session && req.session.user) { // Check if session exists
-    // lookup the user in the DB by pulling their email from the session
-    User.findOne({ email: req.session.user.email }, function (err, user) {
-      if (!user) {
-        // if the user isn't found in the DB, reset the session info and
-        // redirect the user to the login page
-        req.session.reset();
-        res.redirect('/auth/login');
-      } else {
-          // expose the user to the template
-          res.locals.user = user;
-          console.log('User logged in as: ', user.email);
-          // render the connect page
-          res.render('connect', {title: 'Connect your health data'});
-          }
-        });
-      } else {
-        res.redirect('/auth/login');
-        }
-});
-
-// Post sessionTokenObject to the server
-router.post('/connect/finish', auth_controller.post_session_token);
-
-
-// User data in Json format
-router.get('/userdata', function(req, res) {
-
-      if (req.user === undefined) {
-          // The user is not logged in
-          res.json({});
-      } else {
-          res.json({
-              userEmail: req.user.email,
-              publicToken: req.user.humanapi.publicToken
-          });
-      }
-});
-
-// Require our controllers.
-var dashboard_controller = require('../controllers/dashboardController');
+var dashboard_controller = require('../controllers/alfred/dashboard');
 
 // Render the dashboard page after data source connections
 router.get('/dashboard', dashboard_controller.dashboard);
 
+// Refresh the user's latest connected sources
+router.get('/refreshsources', dashboard_controller.refresh_sources);
+
+// Build the user's latest connected sources list
+router.get('/buildsourcelist', dashboard_controller.build_sourceList);
+
+// Refresh the user's latest activity summaries
+router.get('/refreshactivity', dashboard_controller.refresh_activity_summary);
 
 module.exports = router;

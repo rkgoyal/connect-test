@@ -8,7 +8,7 @@ block content
         .col
           h4 <strong>Welcome to Alfred Health</strong>
           br
-          form(method='POST', action='/auth/login')
+          form(method='POST', action='/user/login')
             if (message)
               .alert.alert-danger
                 p <strong> Hmm.. </strong> Invalid username or password. Try again.
@@ -22,7 +22,7 @@ block content
             input.btn.btn-primary(type='submit',value='Sign In')
           br
           p Don't have an account?
-          a(class='button', href='/auth/register') Register here!
+          a(class='button', href='/user/register') Register here!
         .col
           
 

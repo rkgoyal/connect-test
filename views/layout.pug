@@ -12,24 +12,38 @@ html
     
   body
     header
+<<<<<<< HEAD
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         a.navbar-brand(href='/') Alfred Health
+=======
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        if user
+          a.navbar-brand(href='/profile/dashboard')
+            img#nav-logo(src='/images/logo-vert@2x.png')
+        else
+          a.navbar-brand(href='/')
+            img#nav-logo(src='/images/logo-vert@2x.png')
+>>>>>>> microservices-refactor-v1
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
           span.navbar-toggler-icon
         .collapse.navbar-collapse
           ul.navbar-nav.mr-auto
             if user
               li.nav-item
-                a.nav-link(href='/auth/logout') Logout 
+                a.nav-link(href='/user/logout') Logout 
             else
               li.nav-item
-                a.nav-link(href='/auth/login') Sign In
+                a.nav-link(href='/user/login') Sign In
               li.nav-item
-                a.nav-link(href='/auth/register') Register
+                a.nav-link(href='/user/register') Register
 
     main
       block content
   
   footer#footer
+<<<<<<< HEAD
     p Copyright. &copy; 2018. Alfred Health, Inc.
+=======
+    p Copyright. &copy; 2018. Alfred Health Technologies, Inc.
+>>>>>>> microservices-refactor-v1
     append footer

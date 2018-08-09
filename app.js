@@ -11,16 +11,20 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo')(session);
-
+const bluebird = require('bluebird');
+var rp = require('request-promise');
+var Promise = require("bluebird");
 const config = require('./config/database');
 
+// Promisifying
+Promise.promisifyAll(require("request"));
 
 // Create the Express application object
 var app = express();
 
 // Set up mongoose connection
 mongoose.connect(config.database, { useNewUrlParser: true });
-mongoose.Promise = global.Promise;
+mongoose.Promise = require('bluebird');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -91,15 +95,12 @@ app.use(function(req, res, next) {
 
 // Set up the routes
 var index = require('./routes/index');
-var auth = require('./routes/auth');
+var user = require('./routes/user');
 var profile = require('./routes/profile');
-var dataretrieval = require('./routes/dataretrieval');
-var dashanalytics = require('./routes/dashanalytics');
 app.use('/', index);
-app.use('/auth', auth);
+app.use('/user', user);
 app.use('/profile', profile);
-app.use('/dataretrieval', dataretrieval);
-app.use('/dashanalytics', dashanalytics);
+
 
 
 module.exports = app;
