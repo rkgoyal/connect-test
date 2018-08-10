@@ -1,12 +1,12 @@
 // Get user email from userdata API
 var xhReq = new XMLHttpRequest();
-  xhReq.open("GET", 'http://localhost:3000/user/userdata', false);
-  xhReq.send(null);
+var url = '/user/userdata';
+xhReq.open("GET", url, false);
+xhReq.send(null);
 var jsonObject = JSON.parse(xhReq.responseText);
 console.log(jsonObject.userEmail);
 // Get user publicToken from the server
 console.log(jsonObject.publicToken);
-
 
 // Human API connect launch
 var connectBtn = document.getElementById('connect-health-data-btn');

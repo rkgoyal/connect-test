@@ -115,9 +115,10 @@ exports.load_connect_page = function(req, res) {
       } else {
           // expose the user to the template
           res.locals.user = user;
+          email = res.locals.user.email;
           console.log('User logged in as: ', user.email);
           // render the connect page
-          res.render('connect', {title: 'Connect your health data', user: user});
+          res.render('connect', {title: 'Connect your health data', user: user, email: email});
           }
         });
       } else {
